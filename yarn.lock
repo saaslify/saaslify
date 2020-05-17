@@ -3017,6 +3017,11 @@ rsvp@^4.8.4:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
 
+saaslify@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/saaslify/-/saaslify-0.0.1.tgz#cc22406faacd309d6c36a2961bfd91d80b42255e"
+  integrity sha512-tLCvRdNTRH9zHvAB7Y/A9L0vI9udayud7AwmPfcqjkLvd3cYR5O7K1jXMtOtrYBvqRZeVxqeLXIAcbHexNA+lA==
+
 safe-buffer@^5.0.1, safe-buffer@^5.1.2:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"

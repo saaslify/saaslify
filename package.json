@@ -1,17 +1,20 @@
 {
   "name": "saaslify",
   "description": "Saaslify SDK for JavaScript, Node and TypeScript",
-  "version": "0.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
   "repository": "git@github.com:saaslify/saaslify.git",
   "author": "saaslify.com",
+  "main": "dist/index.js",
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
     "build": "tsc",
+    "test": "jest",
     "lint": "prettier --write src/*"
   },
-  "dependencies": {},
+  "dependencies": {
+    "saaslify": "^0.0.1"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.2",
     "@types/node": "^14.0.1",

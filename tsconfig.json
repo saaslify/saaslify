@@ -23,8 +23,7 @@
     "declaration": true,
     "sourceMap": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "noEmit": false
   },
   "include": [
     "src"

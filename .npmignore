@@ -20,3 +20,4 @@ rollup.config.js
 tsconfig.dist.json
 tsconfig.json
 yarn-error.log
+src
