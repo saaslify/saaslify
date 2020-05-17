@@ -1,7 +1,7 @@
 {
   "name": "saaslify",
   "description": "Saaslify SDK for JavaScript, Node and TypeScript",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "repository": "git@github.com:saaslify/saaslify.git",
   "author": "saaslify.com",
   "browser": "dist/saaslify.min.js",
@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "lint": "prettier --write src/*",
-    "build": "rimraf dist && yarn rollup -c"
+    "build": "rimraf dist && yarn rollup -c",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^11.1.0",
