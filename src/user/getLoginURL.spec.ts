@@ -1,8 +1,12 @@
 import getLoginURL from './getLoginURL';
-import { Saaslify } from '../types'
+import { Saaslify } from '../types';
 
 describe('getLoginURL', () => {
-    it.each([['mock', 'http://oauth_basedomain'], ['sandbox', 'https://oauth-dev.saaslify.io'], ['production', 'https://oauth-prod.saaslify.io']])('should get correct url for %s', async (endpoint, domain) => {
+    it.each([
+        ['mock', 'http://oauth_basedomain'],
+        ['sandbox', 'https://oauth-dev.saaslify.io'],
+        ['production', 'https://oauth-prod.saaslify.io'],
+    ])('should get correct url for %s', async (endpoint, domain) => {
         const { data } = await getLoginURL({ endpoint: endpoint as Saaslify.Endpoints, saasId: 'saaslify' })({
             provider: 'github',
             scopes: ['email', 'repo'],
