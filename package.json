@@ -5,7 +5,7 @@
   "repository": "git@github.com:saaslify/saaslify.git",
   "author": "saaslify.com",
   "main": "dist/index.js",
-  "umd": "umd/index.js",
+  "umd": "dist/saaslify.min.js",
   "license": "Apache-2.0",
   "private": false,
   "scripts": {

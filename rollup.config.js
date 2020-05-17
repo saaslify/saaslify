@@ -3,6 +3,7 @@ import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 
 process.env.BABEL_ENV = 'production';
@@ -12,6 +13,7 @@ const pluginsBase = [
     replace({
         'process.env.NODE_ENV': JSON.stringify('production'),
     }),
+
     resolve({ preferBuiltins: true, browser: true }),
     typescript({ tsconfig: './tsconfig.json' }),
     babel({
@@ -30,7 +32,10 @@ export default [
     },
     {
         input: './src/index.ts',
-        output: [{ format: 'umd', file: 'dist/saaslify.min.js', name: 'Saaslify' }],
-        plugins: [...pluginsBase, terser()],
+        output: [{ format: 'umd', file: 'dist/saaslify.min.js', name: 'Saaslify', exports: 'named' }],
+        plugins: [...pluginsBase, commonjs({
+            include: 'node_modules/**',
+        }), terser()],
+        external: [ ]
     },
 ];
