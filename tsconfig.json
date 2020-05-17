@@ -26,6 +26,6 @@
     "noEmit": false
   },
   "include": [
-    "src"
+    "src", "rollup.config.js"
   ]
 }

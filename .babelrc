@@ -1,12 +1,11 @@
 {
     "presets": [
-        ["react-app", { "flow": false, "typescript": true }],
         [
             "@babel/preset-env",
             {
                 "useBuiltIns": "usage",
                 "corejs": "3.6"
             }
-        ],
+        ]
     ]
 }
