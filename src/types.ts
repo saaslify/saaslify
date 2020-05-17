@@ -1,7 +1,8 @@
 export namespace Saaslify {
+    export type Endpoints = 'production' | 'sandbox' | 'mock';
     export type Config = {
         saasId: string;
-        endpoint: 'production' | 'sandbox' | 'mock';
+        endpoint: Endpoints;
     };
 
     export type SDK<ApiDef> = (config: Config) => ApiDef;

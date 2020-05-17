@@ -3,7 +3,7 @@ import { Saaslify } from './types';
 const Configurations = {
     sandbox: {
         oauth: {
-            basedomain: 'https://oauth-dev.saaslify.io/',
+            basedomain: 'https://oauth-dev.saaslify.io',
         },
     },
     production: {
