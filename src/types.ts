@@ -1,7 +1,7 @@
 export namespace Saaslify {
-    export const Production = 'production'
-    export const Sandbox = 'sandbox'
-    export const Mock = 'mock'
+    export const Production = 'production';
+    export const Sandbox = 'sandbox';
+    export const Mock = 'mock';
     export type Endpoints = typeof Production | typeof Sandbox | typeof Mock;
     export type Config = {
         saasId: string;

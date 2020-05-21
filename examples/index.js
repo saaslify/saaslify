@@ -1,11 +1,8 @@
 
 const LoginButton = {
-    init: () => {
+    init: (saaslify) => {
         document.querySelector(`#login`).addEventListener('click', async (e) => {
-            const loginURL = await Saaslify.init({
-                saasId: 'localhost',
-                endpoint: Saaslify.endpoint.Sandbox
-            }).user.getLoginURL({
+            const loginURL = await saaslify.user.getLoginURL({
                 provider: e.target.dataset['provider'],
                 scopes: e.target.dataset['scopes'].split(';'),
                 callbackURL: document.location.href // redirect to this page again
@@ -19,14 +16,25 @@ const LoginButton = {
 }
 
 const CheckAuth = {
-    init: () => {
-        document.addEventListener('DOMContentLoaded', async (e) => {
-            const user = await saalify.user.getUser({
-                provider: e.target.dataset['provider'],
-                scopes: e.target.dataset['scopes'].split(';')
-            })
+    init: async (saaslify) => {
+        console.log('load')
 
-            console.log({ user })
+        const target = document.querySelector(`#login`)
+        const user = await saaslify.user.getUser({
+            provider: target.dataset['provider'],
+            scopes: target.dataset['scopes'].split(';')
+        })
+
+        console.log({user})
+
+        const loginState = ({ color, label }) => `<div style="border-radius:50%;background:${color};text-align:center;">${label}</div>`
+
+        document.querySelector(`#loginstate`).innerHTML = loginState(user ? {
+            color: 'lightgreen',
+            label: 'ON'
+        }: {
+            color: 'red',
+            label: 'OFF'
         })
     }
 }
@@ -42,8 +50,12 @@ const main = () => {
     scriptTag.src = '/js/saaslify.min.js'
     scriptTag.onload = () => {
         const pathname = window.document.location.pathname
+        const saaslify = Saaslify.init({
+            saasId: 'localhost',
+            endpoint: Saaslify.endpoint.Sandbox
+        })
         Object.keys(Modules).filter(prefix => pathname.startsWith(prefix)).forEach(
-            x => Modules[x].forEach(_ => _.init())
+            x => Modules[x].forEach(_ => _.init(saaslify))
         );
 
     }

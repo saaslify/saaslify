@@ -22,3 +22,7 @@ h1, h2, li {
 a {
     color: black;
 }
+
+main {
+    margin: 20px;
+}

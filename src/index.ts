@@ -11,11 +11,11 @@ export type Api = {
 };
 
 const init = (config: Saaslify.Config): Api => {
-    validConfig(config)
+    validConfig(config);
 
-    return ({
+    return {
         user: user(config),
-    })
+    };
 };
 
 export default init;

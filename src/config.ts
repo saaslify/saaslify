@@ -18,14 +18,14 @@ const Configurations = {
     },
 };
 
-export const validConfig =  (config: Saaslify.Config) => {
+export const validConfig = (config: Saaslify.Config) => {
     if (!config.saasId) {
-        throw new Error(`Saaslify.Saalify needs a saasId of type string.`)
+        throw new Error(`Saaslify.Saalify needs a saasId of type string.`);
     }
-    if (!['production' , 'sandbox' , 'mock'].find(x => config.endpoint === x)) {
-        throw new Error(`Saaslify.Saalify needs a and endpoints of 'production' | 'sandbox' | 'mock'.`)
+    if (!['production', 'sandbox', 'mock'].find((x) => config.endpoint === x)) {
+        throw new Error(`Saaslify.Saalify needs a and endpoints of 'production' | 'sandbox' | 'mock'.`);
     }
-}
+};
 
 export const configuration = (config: Saaslify.Config) => {
     return Configurations[config.endpoint];
