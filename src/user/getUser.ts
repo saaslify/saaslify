@@ -41,18 +41,17 @@ export namespace GetUser {
     export type ResponseData = UserInformation | undefined;
     export type Method = Saaslify.Method<Request, ResponseData>;
     export type FactoryMethod = Saaslify.FactoryMethod<Request, ResponseData>;
-
 }
 
 export const getUser: GetUser.FactoryMethod = (config) => (request = {}) => {
     const defaultRequestOpts = {
-        asJWT: false
-    }
+        asJWT: false,
+    };
 
     const combinedRequest = {
         ...defaultRequestOpts,
         ...(request || {}),
-    }
+    };
 
     if (config.endpoint === Saaslify.Mock) {
         return Promise.resolve({
@@ -67,16 +66,12 @@ export const getUser: GetUser.FactoryMethod = (config) => (request = {}) => {
             },
         });
     } else {
-        const configuration = getConfiguration(config)
-        return (config.fetch || window.fetch)(
-            configuration.oauth.basedomain + `/profile`,
-            {
-                credentials: 'include',
-                headers: {'content-type': combinedRequest.asJWT ? GetUser.jwt : GetUser.json }
-            }
-        ).then(_ => _.json())
+        const configuration = getConfiguration(config);
+        return (config.fetch || window.fetch)(configuration.oauth.basedomain + `/profile`, {
+            credentials: 'include',
+            headers: { 'content-type': combinedRequest.asJWT ? GetUser.jwt : GetUser.json },
+        }).then((_) => _.json());
     }
-}
-
+};
 
 export default getUser;

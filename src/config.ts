@@ -28,7 +28,9 @@ export const validConfig = (config: Saaslify.Config) => {
         throw new Error(`Saaslify.Saalify needs a saasId of type string.`);
     }
     if (!Configurations[config.endpoint]) {
-        throw new Error(`Submitted endpoint = ${config.endpoint}. Saaslify.Saalify needs a and endpoints of 'production' | 'sandbox' | 'mock' | 'localhost'.`);
+        throw new Error(
+            `Submitted endpoint = ${config.endpoint}. Saaslify.Saalify needs a and endpoints of 'production' | 'sandbox' | 'mock' | 'localhost'.`,
+        );
     }
 };
 

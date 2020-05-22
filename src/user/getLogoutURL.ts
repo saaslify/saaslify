@@ -12,7 +12,9 @@ export namespace GetLogoutURL {
 
 const getLogoutURL: GetLogoutURL.FactoryMethod = (opts) => (x) =>
     Promise.resolve({
-        data: `${getConfiguration(opts).oauth.basedomain}/logout/${opts.saasId}?callback=${encodeURIComponent(x.callbackURL)}`,
+        data: `${getConfiguration(opts).oauth.basedomain}/logout/${opts.saasId}?callback=${encodeURIComponent(
+            x.callbackURL,
+        )}`,
     });
 
 export default getLogoutURL;

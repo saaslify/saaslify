@@ -16,9 +16,9 @@ export namespace GetLoginURL {
 
 const getLoginURL: GetLoginURL.FactoryMethod = (opts) => (x) =>
     Promise.resolve({
-        data: `${getConfiguration(opts).oauth.basedomain}/connect/${x.provider}?saas_provider=${opts.saasId}${x.scopes.map(
-            (scope) => `&scope=${scope}`,
-        )}&callback=${encodeURIComponent(x.callbackURL)}`,
+        data: `${getConfiguration(opts).oauth.basedomain}/connect/${x.provider}?saas_provider=${
+            opts.saasId
+        }${x.scopes.map((scope) => `&scope=${scope}`)}&callback=${encodeURIComponent(x.callbackURL)}`,
     });
 
 export default getLoginURL;
