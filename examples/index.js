@@ -1,17 +1,20 @@
+const LogoutButton = {
+    init: async (saaslify) => {
+        document.querySelector("#logout").href = await saaslify.user.getLogoutURL({
+            callbackURL: document.location.href // redirect to this page again
+        }).then(x => x.data)
+    }
+}
+
 
 const LoginButton = {
-    init: (saaslify) => {
-        document.querySelector(`#login`).addEventListener('click', async (e) => {
-            const loginURL = await saaslify.user.getLoginURL({
-                provider: e.target.dataset['provider'],
-                scopes: e.target.dataset['scopes'].split(';'),
-                callbackURL: document.location.href // redirect to this page again
-            })
-
-            window.location.href = loginURL.data
-
-            console.log({ loginURL })
-        })
+    init: async (saaslify) => {
+        const loginLink = document.querySelector(`#login`)
+        loginLink.href = await saaslify.user.getLoginURL({
+            provider: loginLink.dataset['provider'],
+            scopes: loginLink.dataset['scopes'].split(';'),
+            callbackURL: document.location.href // redirect to this page again
+        }).then(_ => _.data)
     }
 }
 
@@ -23,25 +26,41 @@ const CheckAuth = {
         const user = await saaslify.user.getUser({
             provider: target.dataset['provider'],
             scopes: target.dataset['scopes'].split(';')
-        })
+        }).then(
+            _ => _,
+            _ => _
+        )
 
-        console.log({user})
+        const loginState = ({ color, label }) => `<span style="border-radius:50%;background:${color};text-align:center;">${label}</span>`
 
-        const loginState = ({ color, label }) => `<div style="border-radius:50%;background:${color};text-align:center;">${label}</div>`
 
-        document.querySelector(`#loginstate`).innerHTML = loginState(user ? {
+        document.querySelector(`#loginstate`).innerHTML = loginState(user.data ? {
             color: 'lightgreen',
             label: 'ON'
         }: {
             color: 'red',
             label: 'OFF'
         })
+
+        if (!user.data) {
+            return
+        }
+
+        const {
+            email,
+            name,
+            avatar,
+            provider
+        } = user.data
+
+        const el = document.createElement('div')
+        el.innerHTML = `<img src=${avatar} width="50" /><p>Login via ${provider}</p><br />${name} (${email})</bt>`
+        document.querySelector('main').appendChild(el)
     }
 }
 
 const Modules = {
-    '/login-button': [ LoginButton ],
-    '/check-auth': [ LoginButton, CheckAuth ]
+    '/check-auth': [ LoginButton, LogoutButton, CheckAuth ]
 }
 
 const main = () => {
@@ -52,7 +71,7 @@ const main = () => {
         const pathname = window.document.location.pathname
         const saaslify = Saaslify.init({
             saasId: 'localhost',
-            endpoint: Saaslify.endpoint.Sandbox
+            endpoint: Saaslify.endpoint.Localhost
         })
         Object.keys(Modules).filter(prefix => pathname.startsWith(prefix)).forEach(
             x => Modules[x].forEach(_ => _.init(saaslify))

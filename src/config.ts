@@ -1,6 +1,6 @@
 import { Saaslify } from './types';
 
-const Configurations = {
+export const Configurations = {
     [Saaslify.Sandbox]: {
         oauth: {
             basedomain: 'https://oauth-dev.saaslify.io',
@@ -16,17 +16,22 @@ const Configurations = {
             basedomain: 'http://oauth_basedomain',
         },
     },
+    [Saaslify.Localhost]: {
+        oauth: {
+            basedomain: 'http://localhost:3000',
+        },
+    },
 };
 
 export const validConfig = (config: Saaslify.Config) => {
     if (!config.saasId) {
         throw new Error(`Saaslify.Saalify needs a saasId of type string.`);
     }
-    if (!['production', 'sandbox', 'mock'].find((x) => config.endpoint === x)) {
-        throw new Error(`Saaslify.Saalify needs a and endpoints of 'production' | 'sandbox' | 'mock'.`);
+    if (!Configurations[config.endpoint]) {
+        throw new Error(`Submitted endpoint = ${config.endpoint}. Saaslify.Saalify needs a and endpoints of 'production' | 'sandbox' | 'mock' | 'localhost'.`);
     }
 };
 
-export const configuration = (config: Saaslify.Config) => {
+export const getConfiguration = (config: Saaslify.Config) => {
     return Configurations[config.endpoint];
 };

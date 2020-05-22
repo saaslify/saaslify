@@ -1,5 +1,5 @@
 import { Saaslify } from '../types';
-import { configuration } from '../config';
+import { getConfiguration } from '../config';
 
 export namespace GetLoginURL {
     type LoginProvider = 'github';
@@ -16,7 +16,7 @@ export namespace GetLoginURL {
 
 const getLoginURL: GetLoginURL.FactoryMethod = (opts) => (x) =>
     Promise.resolve({
-        data: `${configuration(opts).oauth.basedomain}/connect/${x.provider}?saas_provider=${opts.saasId}${x.scopes.map(
+        data: `${getConfiguration(opts).oauth.basedomain}/connect/${x.provider}?saas_provider=${opts.saasId}${x.scopes.map(
             (scope) => `&scope=${scope}`,
         )}&callback=${encodeURIComponent(x.callbackURL)}`,
     });
