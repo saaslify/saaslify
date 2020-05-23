@@ -21,5 +21,5 @@ export const user: User.SDK = (opts) => ({
     getLogoutURL: getLogoutURL(opts),
     getUser: getUser(opts),
     getJWT: getJWT(opts),
-    decodeJWT
+    decodeJWT,
 });
