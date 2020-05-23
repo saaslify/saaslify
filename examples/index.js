@@ -22,11 +22,7 @@ const CheckAuth = {
     init: async (saaslify) => {
         console.log('load')
 
-        const target = document.querySelector(`#login`)
-        const user = await saaslify.user.getUser({
-            provider: target.dataset['provider'],
-            scopes: target.dataset['scopes'].split(';')
-        }).then(
+        const user = await saaslify.user.getUser().then(
             _ => _,
             _ => _
         )
@@ -54,13 +50,64 @@ const CheckAuth = {
         } = user.data
 
         const el = document.createElement('div')
-        el.innerHTML = `<img src=${avatar} width="50" /><p>Login via ${provider}</p><br />${name} (${email})</bt>`
+        el.innerHTML = `<h2>From JSON</h2><img src=${avatar} width="50" /><p>Login via ${provider}</p><br />${name} (${email})</bt>`
+        document.querySelector('main').appendChild(el)
+    }
+}
+
+const CheckJWT = {
+    init: async (saaslify) => {
+
+        const user = await saaslify.user.getUser({
+            asJWT: true
+        }).then(
+            _ => _,
+            _ => _
+        )
+
+        const { value } = saaslify.user.decodeJWT(user.jwt)
+
+        const {
+            email,
+            name,
+            avatar,
+            provider
+        } = value
+
+        const el = document.createElement('div')
+        el.innerHTML = `<h2>From JWT </h2><img src=${avatar} width="50" /><p>Login via ${provider}</p><br />${name} (${email})</bt>`
+        document.querySelector('main').appendChild(el)
+
+    }
+}
+
+const VerifyJWT = {
+    init: async (saaslify) => {
+
+        const user = await saaslify.user.getUser({
+            asJWT: true
+        }).then(
+            _ => _,
+            _ => _
+        )
+
+        const { value } = await saaslify.user.verifyJWT(user.jwt)
+
+        const {
+            email,
+            name,
+            avatar,
+            provider
+        } = value
+
+        const el = document.createElement('div')
+        el.innerHTML = `<h2>From JWT (verified)</h2><img src=${avatar} width="50" /><p>Login via ${provider}</p><br />${name} (${email})</bt>`
         document.querySelector('main').appendChild(el)
     }
 }
 
 const Modules = {
-    '/check-auth': [ LoginButton, LogoutButton, CheckAuth ]
+    '/check-auth': [ LoginButton, LogoutButton, CheckAuth, CheckJWT ]
 }
 
 const main = () => {
