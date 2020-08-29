@@ -1,7 +1,7 @@
 {
   "name": "saaslify",
   "description": "Saaslify SDK for JavaScript, Node and TypeScript",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "repository": "git@github.com:saaslify/saaslify.git",
   "author": "saaslify.com",
   "browser": "dist/saaslify.min.js",

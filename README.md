@@ -46,10 +46,6 @@ script.onload = () => {
 document.head.appendChild(script)
 ```
 
-More efficient use of CDN
-
-
-
 ## Authentication - Who am I?
 
 ### Recipe 1 - Login Button
