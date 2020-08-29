@@ -29,7 +29,7 @@
 We will just touch JavaScript Client SDK and NodeJS
 
 ```javascript
-import { Saaslify } from '/saaslify'
+import { Saaslify } from 'saaslify'
 const saaslify = Saaslify({ saasId: 'your-awesome-app' })
 ...
 ```
